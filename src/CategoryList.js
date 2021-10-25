@@ -3,7 +3,7 @@ import { ListGroup, ListGroupItem } from "reactstrap";
 
 export default class CategoryList extends Component {
   // constructor(props) {
-  //bu şekilde de props.title yazabiliriz -{this.props.title}--direkt h2 arasına da yazabiliriz
+  //bunu -{this.props.title}--direkt h2 arasına da yazabiliriz
   // super(props);
   state = {
     categories: [
@@ -12,12 +12,8 @@ export default class CategoryList extends Component {
       { categoryId: 3, categoryName: "Kişisel Bakım ve Kozmetik" },
       { categoryId: 4, categoryName: "Bahçe Ev Ürünleri" },
       { categoryId: 5, categoryName: "Anne ve Bebek" },
-    ],
-    currentCategory: ""
-  };
-
-  changeCategory = (category) => {
-    this.setState({ currentCategory: category.categoryName });
+    ]
+    
   };
 
   render() {
@@ -27,14 +23,14 @@ export default class CategoryList extends Component {
         <ListGroup>
           {this.state.categories.map((category) => (
             <ListGroupItem
-              onClick={() => this.changeCategory(category)}
+              onClick={() => this.props.changeCategory(category)}
               key={category.categoryId}
             >
               {category.categoryName}
             </ListGroupItem>
           ))}
         </ListGroup>
-        <h4>{this.state.currentCategory}</h4>
+        <h4>{this.props.currentCategory}</h4>
       </div>
     );
   }
