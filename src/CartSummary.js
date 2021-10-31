@@ -1,13 +1,15 @@
 import React, { Component, } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { NavItem,Badge } from "react-bootstrap";
+import Badge from 'react-bootstrap/Badge';
+import { NavItem, } from "react-bootstrap";
 import { 
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,  
-  NavLink, 
+  NavLink,  
 } from "reactstrap";
+import { Link } from "react-router-dom";
 
 export default class CartSummary extends Component {
   renderSummary() {
@@ -20,13 +22,15 @@ export default class CartSummary extends Component {
         <DropdownMenu right>
           {this.props.cart.map((cartItem) => (
             <DropdownItem key={cartItem.product.id}>
-              <Badge color="" onClick={()=>this.props.removeFromCart(cartItem.product)}> X </Badge>
-              {cartItem.product.productName}
-              <Badge color=""> {cartItem.quantity} </Badge>  
+              <Badge bg="danger" onClick={()=>this.props.removeFromCart(cartItem.product)}> X </Badge> 
+              &nbsp; {cartItem.product.productName} &nbsp;
+              <Badge bg="success" pill> {cartItem.quantity} </Badge> 
             </DropdownItem>
           ))}
           <DropdownItem divider />
-          <DropdownItem>Reset</DropdownItem>
+          <DropdownItem>
+            <Link to="cart"> <Badge bg="primary"> Go to Cart </Badge> </Link>
+          </DropdownItem>
         </DropdownMenu>
       </UncontrolledDropdown> 
     );     
