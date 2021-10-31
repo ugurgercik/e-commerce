@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Col, Container, Row } from "reactstrap";
+import { Col, Container, Row, } from "reactstrap";
 import CategoryList from "./CategoryList";
 import Navi from "./Navi";
 import ProductList from "./ProductList";
+
 
 export default class App extends Component {
   state = { currentCategory: "", products: [], cart:[] };
@@ -35,7 +36,12 @@ export default class App extends Component {
       newCart.push({product:product,quantity:1});
     }
       this.setState({cart:newCart});
-}
+    } 
+
+    removeFromCart=(product)=>{
+      let newCart = this.state.cart.filter(c=>c.product.id!==product.id)
+      this.setState({cart:newCart})
+    }
 
   render() {
     let categoryInfo = { title: "Category List" };
@@ -44,8 +50,7 @@ export default class App extends Component {
     return (
       <div>
         <Container>
-          <Navi 
-          cart={this.state.cart}
+          <Navi removeFromCart={this.removeFromCart} cart={this.state.cart}
           info={naviInfo} />
           <Row>
             <Col xs="3">
@@ -62,7 +67,8 @@ export default class App extends Component {
                 currentCategory={this.state.currentCategory}
                 info={productInfo}
               />
-            </Col>
+            </Col>              
+
           </Row>
         </Container>
       </div>
